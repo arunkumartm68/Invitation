@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wedding Invitation | Guru S M & Pooja K</title>
+  
+  <!-- SEO & Social Preview Tags (WhatsApp, iMessage, Facebook) -->
+  <meta name="description" content="We cordially invite you to celebrate the wedding ceremony of Guru S M & Pooja K on 14th & 15th November 2026 at Shree Rudreshwara Samudaya Bhavana.">
+  <meta property="og:title" content="Wedding Invitation | Guru S M & Pooja K">
+  <meta property="og:description" content="We request the honor of your presence and blessings at our wedding reception and sacred Muhurtha.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80">
+  
+  <!-- Google Fonts: Luxury Serif & Script -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Great+Vibes&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="theme-royal-crimson" id="appBody">
+
+  <!-- Interactive Petals & Sparkles Canvas -->
+  <canvas id="petalsCanvas" class="petals-canvas"></canvas>
+
+  <!-- ============================================================
+       ENVELOPE UNSEALING EXPERIENCE (Opening Ceremony)
+  ============================================================ -->
+  <div id="envelopeOverlay" class="envelope-overlay">
+    <div class="envelope-wrapper">
+      <div class="envelope-badge">
+        <span class="envelope-badge-text">THE AUSPICIOUS WEDDING</span>
+        <span class="envelope-sub-badge">INVITATION</span>
+      </div>
+
+      <div class="envelope-card-container" id="envelopeBox">
+        <!-- Envelope Flap -->
+        <div class="envelope-back"></div>
+        
+        <!-- Physical Card Peek inside -->
+        <div class="envelope-insert" id="envelopeInsert">
+          <div class="insert-filigree top-left"></div>
+          <div class="insert-filigree top-right"></div>
+          <div class="insert-crest">
+            <span class="crest-initials" id="envInitials">G & P</span>
+          </div>
+          <h3 class="insert-couple" id="envCoupleNames">Guru & Pooja</h3>
+          <p class="insert-date" id="envDate">14th & 15th November 2026</p>
+          <div class="insert-divider">
+            <span>✦</span>
+          </div>
+        </div>
+
+        <div class="envelope-front"></div>
+        <div class="envelope-flap" id="envelopeFlap"></div>
+
+        <!-- Ornate Wax Seal Button -->
+        <button class="wax-seal-btn" id="openInviteBtn" aria-label="Open Invitation">
+          <div class="wax-seal-disc">
+            <div class="wax-inner-border">
+              <i class="fa-solid fa-crown wax-crown"></i>
+              <span class="wax-initials" id="waxInitials">G&P</span>
+            </div>
+          </div>
+          <div class="seal-glow"></div>
+        </button>
+      </div>
+
+      <div class="envelope-prompt">
+        <p class="prompt-text">
+          <i class="fa-solid fa-hand-pointer"></i> Tap to unseal Invitation
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       NAVIGATION BAR
+  ============================================================ -->
+  <nav class="nav-bar" id="navbar">
+    <div class="nav-container">
+      <a href="#hero" class="nav-brand">
+        <span class="brand-crest" id="navInitials">G & P</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#couple">The Couple</a></li>
+        <li><a href="#itinerary">Events</a></li>
+        <li><a href="#venue">Venue</a></li>
+      </ul>
+      <a href="https://www.google.com/maps/search/?api=1&query=Shree+Rudreshwara+Samudaya+Bhavana,+Hebbalu,+near+hebbalu+Toll+plaza,+Davanagere" target="_blank" rel="noopener noreferrer" class="nav-cta-btn" id="navMapBtn">View Map</a>
+    </div>
+  </nav>
+
+  <!-- ============================================================
+       MAIN INVITATION CONTENT
+  ============================================================ -->
+  <main class="main-content" id="mainContent">
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="hero-section">
+      <div class="hero-bg-pattern"></div>
+      
+      <!-- Top Auspicious Invocation -->
+      <div class="auspicious-mantra">
+        <div class="mantra-icon"><i class="fa-solid fa-om"></i></div>
+        <div class="mantra-sanskrit">OM SHRI GANESHAYA NAMAHA</div>
+        <p class="mantra-translation">With the divine blessings of Lord Ganesha, our elders & ancestors</p>
+      </div>
+
+      <div class="hero-card">
+        <!-- Gold corner filigrees -->
+        <div class="filigree-corner top-left"></div>
+        <div class="filigree-corner top-right"></div>
+        <div class="filigree-corner bottom-left"></div>
+        <div class="filigree-corner bottom-right"></div>
+
+        <div class="hero-inner-border">
+          <p class="invitation-intro">
+            We request the honor of your presence and blessings<br>at the wedding celebrations of
+          </p>
+
+          <div class="couple-hero-display">
+            <h1 class="groom-hero-name" id="heroGroomName">Guru S M</h1>
+            <div class="hero-connector">
+              <span class="connector-line"></span>
+              <span class="connector-symbol">&</span>
+              <span class="connector-line"></span>
+            </div>
+            <h1 class="bride-hero-name" id="heroBrideName">Pooja K</h1>
+          </div>
+
+          <p class="invitation-quote" id="heroQuote">
+            "Two souls united by destiny, blessed by tradition, beginning a lifetime of togetherness."
+          </p>
+
+          <!-- Dual Event Showcase: Reception & Muhurtha -->
+          <div class="hero-date-banner-dual">
+            <!-- Event 1: Reception -->
+            <div class="hero-date-item">
+              <div class="date-item-text">
+                <span class="event-type-badge">Reception</span>
+                <h3 class="date-item-title">Saturday, 14th November 2026</h3>
+                <p class="date-item-time"><i class="fa-regular fa-clock"></i> 07:30 PM onwards</p>
+              </div>
+            </div>
+
+            <div class="dual-date-divider"></div>
+
+            <!-- Event 2: Muhurtha -->
+            <div class="hero-date-item">
+              <div class="date-item-text">
+                <span class="event-type-badge muhurtha">Auspicious Muhurtha</span>
+                <h3 class="date-item-title">Sunday, 15th November 2026</h3>
+                <p class="date-item-time"><i class="fa-regular fa-clock"></i> 09:15 AM to 10:45 AM (Lagnam)</p>
+              </div>
+            </div>
+          </div>
+
+          <p class="hero-venue-summary" id="heroVenueSummary">
+            <i class="fa-solid fa-location-dot"></i> Shree Rudreshwara Samudaya Bhavana, NH-4 Highway, Hebbalu, Davanagere
+          </p>
+
+          <!-- Live Countdown Timer -->
+          <div class="countdown-container">
+            <div class="countdown-title">Counting Down to the Wedding Celebrations</div>
+            <div class="countdown-grid" id="countdownGrid">
+              <div class="countdown-box">
+                <span class="countdown-num" id="cdDays">00</span>
+                <span class="countdown-label">Days</span>
+              </div>
+              <div class="countdown-separator">:</div>
+              <div class="countdown-box">
+                <span class="countdown-num" id="cdHours">00</span>
+                <span class="countdown-label">Hours</span>
+              </div>
+              <div class="countdown-separator">:</div>
+              <div class="countdown-box">
+                <span class="countdown-num" id="cdMinutes">00</span>
+                <span class="countdown-label">Minutes</span>
+              </div>
+              <div class="countdown-separator">:</div>
+              <div class="countdown-box">
+                <span class="countdown-num" id="cdSeconds">00</span>
+                <span class="countdown-label">Seconds</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Action Buttons -->
+          <div class="hero-actions">
+            <button class="gold-action-btn" id="addToCalBtn">
+              <i class="fa-regular fa-calendar-plus"></i> Add to Calendar
+            </button>
+            <a href="https://www.google.com/maps/search/?api=1&query=Shree+Rudreshwara+Samudaya+Bhavana,+Hebbalu,+near+hebbalu+Toll+plaza,+Davanagere" target="_blank" rel="noopener noreferrer" class="outline-action-btn" id="heroMapBtn">
+              <i class="fa-solid fa-diamond-turn-right"></i> View on Google Maps
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: THE COUPLE & FAMILIES -->
+    <section id="couple" class="section couple-section">
+      <div class="section-ornament">
+        <span class="ornament-leaf left">❦</span>
+        <span class="ornament-center">The Auspicious Union</span>
+        <span class="ornament-leaf right">❧</span>
+      </div>
+      <h2 class="section-title">The Bride & The Groom</h2>
+      <p class="section-subtitle">Surrounded by the boundless love, affection, and blessings of our families</p>
+
+      <div class="couple-profiles-grid">
+        <!-- Groom Card -->
+        <div class="couple-card groom-card">
+          <div class="portrait-frame">
+            <div class="portrait-glow"></div>
+            <img src="images/groom.jpg" alt="Guru S M - Groom" class="portrait-img" id="groomImg">
+            <div class="portrait-border-svg"></div>
+          </div>
+          <div class="couple-card-body">
+            <span class="card-role-pill">The Groom</span>
+            <h3 class="person-name" id="groomNameCard">Guru S M</h3>
+            <p class="person-parents" id="groomParents">With the divine blessings of family & elders</p>
+            <div class="divider-mini"><span>❖</span></div>
+            <p class="person-bio" id="groomBio">
+              Ready to embark on a sacred lifelong journey of companionship and eternal love with his beloved Pooja.
+            </p>
+          </div>
+        </div>
+
+        <!-- Center Sacred Union Crest -->
+        <div class="union-emblem">
+          <div class="mandala-ring"></div>
+          <div class="mandala-ring outer"></div>
+          <div class="knot-symbol">
+            <i class="fa-solid fa-heart"></i>
+          </div>
+          <span class="hashtag-label" id="coupleHashtag">#GuruWedsPooja</span>
+        </div>
+
+        <!-- Bride Card -->
+        <div class="couple-card bride-card">
+          <div class="portrait-frame">
+            <div class="portrait-glow"></div>
+            <img src="images/bride.jpg" alt="Pooja K - Bride" class="portrait-img" id="brideImg">
+            <div class="portrait-border-svg"></div>
+          </div>
+          <div class="couple-card-body">
+            <span class="card-role-pill">The Bride</span>
+            <h3 class="person-name" id="brideNameCard">Pooja K</h3>
+            <p class="person-parents" id="brideParents">With the loving blessings of family & ancestors</p>
+            <div class="divider-mini"><span>❖</span></div>
+            <p class="person-bio" id="brideBio">
+              Stepping into a lifetime of endless laughter, devotion, and blissful togetherness with Guru.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: WEDDING ITINERARY & EVENTS -->
+    <section id="itinerary" class="section itinerary-section">
+      <div class="section-ornament">
+        <span class="ornament-leaf left">❦</span>
+        <span class="ornament-center">Celebration Program</span>
+        <span class="ornament-leaf right">❧</span>
+      </div>
+      <h2 class="section-title">Events & Auspicious Ceremonies</h2>
+      <p class="section-subtitle">Join us in celebrating each moment of our auspicious wedding ceremonies</p>
+
+      <div class="events-grid" id="eventsContainer">
+        <!-- Dynamically rendered via script.js from config -->
+      </div>
+    </section>
+
+    <!-- SECTION: VENUE & TRAVEL -->
+    <section id="venue" class="section venue-section">
+      <div class="section-ornament">
+        <span class="ornament-leaf left">❦</span>
+        <span class="ornament-center">Location & Hospitality</span>
+        <span class="ornament-leaf right">❧</span>
+      </div>
+      <h2 class="section-title">The Wedding Destination</h2>
+      <p class="section-subtitle">We look forward to welcoming you and your family</p>
+
+      <div class="venue-showcase-card">
+        <div class="venue-info-side">
+          <div class="venue-chip">Kalyana Mantapa</div>
+          <h3 class="venue-title" id="venueName">Shree Rudreshwara Samudaya Bhavana</h3>
+          <p class="venue-hall" id="venueHall">Main Hall & Kalyana Mantapa</p>
+          
+          <div class="venue-detail-item">
+            <i class="fa-solid fa-map-location-dot"></i>
+            <div>
+              <strong>Complete Address</strong>
+              <p id="venueAddress">Hebbalu, NH-4 Highway, near hebbalu Toll plaza ,Davanagere District, Karnataka - 577556</p>
+            </div>
+          </div>
+
+          <div class="venue-detail-item">
+            <i class="fa-solid fa-map-pin"></i>
+            <div>
+              <strong>Map Link</strong>
+              <p><a href="https://www.google.com/maps/search/?api=1&query=Shree+Rudreshwara+Samudaya+Bhavana,+Hebbalu,+near+hebbalu+Toll+plaza,+Davanagere" target="_blank" rel="noopener noreferrer" id="venueMapLink" style="color: var(--primary-color); font-weight: 600; text-decoration: underline;">Open in Google Maps</a></p>
+            </div>
+          </div>
+
+          <div class="venue-detail-item">
+            <i class="fa-solid fa-car-side"></i>
+            <div>
+              <strong>Parking & Hospitality</strong>
+              <p>Parking facility and family hospitality assistance available at the premises.</p>
+            </div>
+          </div>
+
+          <div class="venue-actions">
+            <a href="https://www.google.com/maps/dir/?api=1&destination=Shree+Rudreshwara+Samudaya+Bhavana,+Hebbalu,+near+hebbalu+Toll+plaza,+Davanagere" target="_blank" rel="noopener noreferrer" class="gold-action-btn" id="venueDirectionsBtn">
+              <i class="fa-solid fa-diamond-turn-right"></i> Open Google Maps Directions
+            </a>
+            <button class="outline-action-btn" id="copyAddressBtn">
+              <i class="fa-regular fa-copy"></i> Copy Full Address
+            </button>
+          </div>
+        </div>
+
+        <div class="venue-map-side">
+          <!-- Interactive Map Container -->
+          <div class="map-embed-wrapper">
+            <iframe 
+              id="venueMapIframe"
+              title="Venue Location Map"
+              src="https://maps.google.com/maps?q=Shree+Rudreshwara+Samudaya+Bhavana+Hebbalu+near+hebbalu+Toll+plaza+Davanagere&t=&z=14&ie=UTF8&iwloc=&output=embed" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer-section">
+      <div class="footer-ornament">✦ ✦ ✦</div>
+      <h3 class="footer-initials" id="footerInitials">G & P</h3>
+      <p class="footer-date" id="footerDate">14th & 15th November 2026 • Shree Rudreshwara Samudaya Bhavana, Hebbalu, Davanagere</p>
+      <p class="footer-blessing">
+        With immense love and gratitude,<br>
+        <strong>The Family of Guru S M & Pooja K</strong>
+      </p>
+    </footer>
+  </main>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+</body>
+</html>
