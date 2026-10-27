@@ -17,14 +17,14 @@
         title: "Groom",
         parents: "With the divine blessings of family & elders",
         bio: "Ready to embark on a sacred lifelong journey with his beloved Pooja.",
-        image: "images/groom.jpg"
+        image: "images/groom.jpg?v=2"
       },
       bride: {
         name: "Pooja K",
         title: "Bride",
         parents: "With the loving blessings of family & ancestors",
         bio: "Stepping into a lifetime of endless laughter, companionship, and joy with Guru.",
-        image: "images/bride.jpg"
+        image: "images/bride.jpg?v=2"
       },
       coupleImage: "images/couple.jpg",
       initials: "G & P",
