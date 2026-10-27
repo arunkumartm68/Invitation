@@ -225,7 +225,9 @@ body {
   font-family: var(--font-serif-heading);
   font-size: 1.4rem;
   color: #54091c;
-  letter-spacing: 2px;
+  letter-spacing: 2.5px;
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0, "clig" 0, "dlig" 0, "hlig" 0;
   margin-bottom: 6px;
 }
 
@@ -583,12 +585,18 @@ body {
 }
 
 .groom-hero-name, .bride-hero-name {
-  font-family: var(--font-serif-royal);
-  font-size: 2.6rem;
+  font-family: var(--font-serif-heading);
+  font-size: 2.7rem;
   font-weight: 700;
   color: var(--primary-color);
-  letter-spacing: 2px;
+  letter-spacing: 3.5px;
   line-height: 1.15;
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0, "clig" 0, "dlig" 0, "hlig" 0, "calt" 0;
+}
+
+.bride-hero-name {
+  letter-spacing: 4px;
 }
 
 .hero-connector {
@@ -984,6 +992,9 @@ body {
   font-family: var(--font-serif-heading);
   font-size: 1.6rem;
   color: var(--primary-color);
+  letter-spacing: 2px;
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0, "clig" 0, "dlig" 0, "hlig" 0;
   margin-bottom: 4px;
 }
 
