@@ -16,6 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Great+Vibes&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@400;500;600;700&family=Noto+Serif+Kannada:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -23,7 +24,23 @@
   <!-- Stylesheets -->
   <link rel="stylesheet" href="styles.css">
 </head>
-<body class="theme-royal-crimson" id="appBody">
+<body class="theme-royal-crimson choosing-language" id="appBody">
+
+  <div id="languageOverlay" class="language-overlay" role="dialog" aria-modal="true" aria-labelledby="languageTitle" aria-describedby="languageSubtitle">
+    <div class="language-card">
+      <div class="language-ornament" aria-hidden="true">❦</div>
+      <p class="language-welcome" lang="kn">ಮದುವೆಯ ಮಮತೆಯ ಕರೆಯೋಲೆ</p>
+      <h1 id="languageTitle"><span lang="kn">ನಿಮ್ಮ ಭಾಷೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ</span><span lang="en">Choose your language</span></h1>
+      <p id="languageSubtitle"><span lang="kn">ನಮ್ಮ ವಿವಾಹಕ್ಕೆ ಆತ್ಮೀಯ ಸ್ವಾಗತ</span><br><span lang="en">A warm welcome to our wedding</span></p>
+      <div class="language-options">
+        <button type="button" class="language-option" data-language="kn" lang="kn"><span class="language-option-name">ಕನ್ನಡ</span><span>ಕನ್ನಡದಲ್ಲಿ ಆಹ್ವಾನವನ್ನು ನೋಡಿ</span></button>
+        <button type="button" class="language-option" data-language="en" lang="en"><span class="language-option-name">English</span><span>View invitation in English</span></button>
+      </div>
+      <div class="language-ornament" aria-hidden="true">✦</div>
+      <noscript><p lang="kn">ಆಹ್ವಾನವನ್ನು ನೋಡಲು ನಿಮ್ಮ ಬ್ರೌಸರ್‌ನಲ್ಲಿ JavaScript ಸಕ್ರಿಯಗೊಳಿಸಿ.</p><p lang="en">Please enable JavaScript in your browser to view the invitation.</p></noscript>
+    </div>
+  </div>
+  <button type="button" id="changeLanguageBtn" class="language-switch" aria-haspopup="dialog" aria-controls="languageOverlay" hidden><span lang="kn">ಕನ್ನಡ</span> / <span lang="en">English</span></button>
 
   <!-- Interactive Petals & Sparkles Canvas -->
   <canvas id="petalsCanvas" class="petals-canvas"></canvas>
@@ -31,7 +48,7 @@
   <!-- ============================================================
        ENVELOPE UNSEALING EXPERIENCE (Opening Ceremony)
   ============================================================ -->
-  <div id="envelopeOverlay" class="envelope-overlay">
+  <div id="envelopeOverlay" class="envelope-overlay" inert aria-hidden="true">
     <div class="envelope-wrapper">
       <div class="envelope-badge">
         <span class="envelope-badge-text">THE AUSPICIOUS WEDDING</span>
@@ -82,7 +99,7 @@
   <!-- ============================================================
        NAVIGATION BAR
   ============================================================ -->
-  <nav class="nav-bar" id="navbar">
+  <nav class="nav-bar" id="navbar" inert>
     <div class="nav-container">
       <a href="#hero" class="nav-brand">
         <span class="brand-crest" id="navInitials">G & P</span>
@@ -99,7 +116,7 @@
   <!-- ============================================================
        MAIN INVITATION CONTENT
   ============================================================ -->
-  <main class="main-content" id="mainContent">
+  <main class="main-content" id="mainContent" inert>
 
     <!-- HERO SECTION -->
     <section id="hero" class="hero-section">
@@ -219,7 +236,7 @@
         <div class="couple-card groom-card">
           <div class="portrait-frame">
             <div class="portrait-glow"></div>
-            <img src="images/groom.jpg?v=2" alt="Guru S M - Groom" class="portrait-img" id="groomImg">
+            <img src="images/groom.jpg?v=3" alt="Guru S M - Groom" class="portrait-img" id="groomImg">
             <div class="portrait-border-svg"></div>
           </div>
           <div class="couple-card-body">
@@ -247,7 +264,9 @@
         <div class="couple-card bride-card">
           <div class="portrait-frame">
             <div class="portrait-glow"></div>
-            <img src="images/bride.jpg?v=2" alt="Pooja K - Bride" class="portrait-img" id="brideImg">
+            <div class="portrait-crop">
+              <img src="images/bride.jpg?v=3" alt="Pooja K - Bride" class="portrait-img" id="brideImg">
+            </div>
             <div class="portrait-border-svg"></div>
           </div>
           <div class="couple-card-body">
@@ -356,6 +375,7 @@
   </main>
 
   <!-- Scripts -->
+  <script src="languages.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

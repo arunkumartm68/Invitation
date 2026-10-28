@@ -37,6 +37,120 @@
   --transition-smooth: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
+/* The language welcome appears before the original envelope experience. */
+[hidden] { display: none !important; }
+body.choosing-language { overflow: hidden; }
+.language-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  display: grid;
+  place-items: center;
+  overflow-y: auto;
+  padding: 28px 20px;
+  background: radial-gradient(ellipse at top, #510c23, #150206 80%);
+}
+.language-card {
+  width: min(100%, 620px);
+  padding: clamp(24px, 5vw, 48px);
+  text-align: center;
+  color: #f7eedb;
+  border: 1px solid var(--border-gold-strong);
+  border-radius: 20px;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.045), rgba(0, 0, 0, 0.16));
+  box-shadow: 0 24px 80px #0005, inset 0 0 0 7px #d4af3709;
+}
+.language-ornament { color: var(--gold-foil-1); font-size: 2rem; }
+.language-welcome {
+  font-family: 'Noto Serif Kannada', serif;
+  color: var(--gold-foil-2);
+  margin: 12px 0 24px;
+  font-size: 0.95rem;
+}
+#languageTitle { font-weight: 500; line-height: 1.7; }
+#languageTitle span { display: block; }
+#languageTitle [lang="kn"] { font-family: 'Noto Serif Kannada', serif; font-size: clamp(1.25rem, 4.5vw, 1.8rem); }
+#languageTitle [lang="en"] { font-family: var(--font-serif-heading); font-size: clamp(1.05rem, 3.8vw, 1.45rem); margin-top: 8px; }
+#languageSubtitle { color: #ded0c8; margin: 18px 0 30px; line-height: 1.9; }
+#languageSubtitle [lang="kn"] { font-family: 'Noto Sans Kannada', sans-serif; font-size: 0.9rem; }
+#languageSubtitle [lang="en"] { font-size: 1.1rem; }
+.language-options { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+.language-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 134px;
+  padding: 20px 12px;
+  background: #faf4e8;
+  color: var(--primary-dark);
+  border: 2px solid var(--gold-foil-1);
+  border-radius: 12px;
+  font-family: var(--font-serif-body);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+}
+.language-option[lang="kn"] { font-family: 'Noto Sans Kannada', sans-serif; font-size: 0.78rem; line-height: 1.8; }
+.language-option-name { font-size: 1.8rem; font-weight: 600; }
+.language-option:hover { background: #fff9e9; transform: translateY(-3px); }
+.language-option:focus-visible, .language-switch:focus-visible { outline: 3px solid #fff; outline-offset: 5px; }
+.language-switch {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 2100;
+  min-height: 44px;
+  border: 1px solid var(--gold-foil-1);
+  border-radius: 24px;
+  background: var(--primary-dark);
+  color: #f3e5ab;
+  padding: 10px 18px;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  cursor: pointer;
+  box-shadow: 0 4px 20px #0003;
+}
+.language-switch [lang="kn"] { font-family: 'Noto Sans Kannada', sans-serif; }
+
+/* Kannada needs natural spacing and shaping, including conjunct characters. */
+html:lang(kn) body {
+  --font-serif-royal: 'Noto Serif Kannada', serif;
+  --font-serif-heading: 'Noto Serif Kannada', serif;
+  --font-serif-body: 'Noto Sans Kannada', sans-serif;
+  --font-sans: 'Noto Sans Kannada', sans-serif;
+  --font-script: 'Noto Serif Kannada', serif;
+}
+html:lang(kn) body * {
+  letter-spacing: normal;
+  text-transform: none;
+  font-style: normal;
+  font-variant-ligatures: normal;
+  font-feature-settings: normal;
+}
+html:lang(kn) .groom-hero-name, html:lang(kn) .bride-hero-name { font-size: clamp(1.65rem, 5vw, 2.7rem); line-height: 1.7; }
+html:lang(kn) .connector-symbol { font-size: 1.1rem; line-height: 1.8; }
+html:lang(kn) .section-title, html:lang(kn) .venue-title, html:lang(kn) .event-title { line-height: 1.8; }
+html:lang(kn) .invitation-intro, html:lang(kn) .person-bio, html:lang(kn) .venue-detail-item p { line-height: 1.9; }
+html:lang(kn) .date-item-title, html:lang(kn) .date-item-time { line-height: 1.9; }
+html:lang(kn) .event-actions { flex-wrap: wrap; }
+html:lang(kn) .event-cal-btn, html:lang(kn) .event-map-btn { flex-basis: 140px; font-size: 0.8rem; line-height: 1.8; }
+html:lang(kn) .crest-initials, html:lang(kn) .wax-initials { font-size: 0.8rem; }
+html:lang(kn) .footer-section { padding-bottom: 90px; }
+@media (max-width: 420px) {
+  .language-options { grid-template-columns: 1fr; gap: 12px; }
+  .language-option { min-height: 100px; padding: 14px; gap: 5px; }
+  .language-card { padding: 22px 18px; }
+  .language-welcome { margin-bottom: 14px; }
+  #languageSubtitle { margin: 12px 0 20px; }
+  html:lang(kn) .section-title { font-size: 1.65rem; }
+  html:lang(kn) .hero-inner-border { padding-left: 12px; padding-right: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .language-option { transition: none; }
+}
+
 /* --- Color Themes --- */
 body.theme-regal-emerald {
   --primary-color: #0f3e2b;
@@ -972,6 +1086,23 @@ body {
   object-fit: cover;
   border-radius: 50%;
   border: 3px solid #ffffff;
+}
+
+.portrait-crop {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 3px solid #ffffff;
+}
+
+.portrait-crop .portrait-img {
+  display: block;
+  border: none;
+}
+
+#brideImg {
+  transform: scale(1.1) translateX(-4%);
 }
 
 .card-role-pill {

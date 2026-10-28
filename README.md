@@ -20,6 +20,8 @@ A luxury interactive wedding e-invitation webpage created for **Guru S M** and *
 
 ## ✨ Sections Included
 
+Guests first choose **ಕನ್ನಡ** or **English** before opening the envelope. English keeps the existing invitation wording and design. Kannada includes locally adapted wedding wording, names, ceremony details, venue information, calendar entries, and copied addresses. The floating **ಕನ್ನಡ / English** button lets guests change languages at any time. Kannada translations are maintained in `languages.js`.
+
 1. **Envelope Opening Ritual:**
    - 3D interactive royal envelope with authentic wax seal and golden `G & P` crest.
    - Tap to unseal the invitation with smooth animations and falling rose petals & golden sparklers.

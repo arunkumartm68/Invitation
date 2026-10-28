@@ -10,21 +10,21 @@
   'use strict';
 
   // Wedding Configuration (Guru S M & Pooja K)
-  const config = {
+  const englishConfig = {
     couple: {
       groom: {
         name: "Guru S M",
         title: "Groom",
         parents: "With the divine blessings of family & elders",
         bio: "Ready to embark on a sacred lifelong journey with his beloved Pooja.",
-        image: "images/groom.jpg?v=2"
+        image: "images/groom.jpg?v=3"
       },
       bride: {
         name: "Pooja K",
         title: "Bride",
         parents: "With the loving blessings of family & ancestors",
         bio: "Stepping into a lifetime of endless laughter, companionship, and joy with Guru.",
-        image: "images/bride.jpg?v=2"
+        image: "images/bride.jpg?v=3"
       },
       coupleImage: "images/couple.jpg",
       initials: "G & P",
@@ -64,6 +64,106 @@
       }
     ]
   };
+
+  const kannada = window.weddingKannada;
+  let language = 'en';
+  let config = englishConfig;
+  let languageChosen = false;
+  let countdownInterval = null;
+  let copyFeedbackTimeout = null;
+  const englishUi = {
+    ceremony: 'Ceremony', date: 'Date', time: 'Time', venue: 'Venue',
+    addEvent: 'Add Event', directions: 'Directions', copyAddress: 'Copy Full Address',
+    copied: 'Copied!', copyError: 'Could not copy the address. Please select and copy the address above.',
+    openInvitation: 'Open Invitation', mapTitle: 'Venue Location Map', changeLanguage: 'Change language',
+    calendarTitle: "Wedding of Guru S M & Pooja K",
+    calendarIntro: 'Wedding Celebrations of Guru S M & Pooja K',
+    calendarReception: 'Reception: Saturday, 14th November 2026, 7:30 PM onwards',
+    calendarMuhurtha: 'Auspicious Muhurtha: Sunday, 15th November 2026, 9:15 AM – 10:45 AM',
+    address: 'Address'
+  };
+  const ui = key => language === 'kn' ? kannada.ui[key] : englishUi[key];
+  const localizedContent = Object.entries(kannada.content).map(([selector, translated]) => {
+    const node = document.querySelector(selector);
+    return { node, translated, original: node.innerHTML };
+  });
+  const originalTitle = document.title;
+  const metadata = ['meta[name="description"]', 'meta[property="og:title"]', 'meta[property="og:description"]']
+    .map(selector => ({ node: document.querySelector(selector), original: document.querySelector(selector).content }));
+  const languageOverlay = document.getElementById('languageOverlay');
+  const languageButtons = [...languageOverlay.querySelectorAll('[data-language]')];
+  const changeLanguageBtn = document.getElementById('changeLanguageBtn');
+
+  function setInvitationInert(inert) {
+    document.getElementById('navbar').inert = inert;
+    document.getElementById('mainContent').inert = inert;
+  }
+
+  function applyLanguage(selected) {
+    language = selected;
+    config = selected === 'kn' ? {
+      ...englishConfig,
+      couple: {
+        ...englishConfig.couple, ...kannada.couple,
+        groom: { ...englishConfig.couple.groom, ...kannada.couple.groom },
+        bride: { ...englishConfig.couple.bride, ...kannada.couple.bride }
+      },
+      dateFormatted: kannada.dateFormatted,
+      muhurthamTime: kannada.muhurthamTime,
+      venue: { ...englishConfig.venue, ...kannada.venue },
+      events: kannada.events
+    } : englishConfig;
+    document.documentElement.lang = selected;
+    localizedContent.forEach(({ node, translated, original }) => {
+      node.innerHTML = selected === 'kn' ? translated : original;
+    });
+    document.title = selected === 'kn' ? kannada.title : originalTitle;
+    const translatedMetadata = [kannada.description, kannada.title, kannada.socialDescription];
+    metadata.forEach(({ node, original }, index) => {
+      node.content = selected === 'kn' ? translatedMetadata[index] : original;
+    });
+    elements.openInviteBtn.setAttribute('aria-label', ui('openInvitation'));
+    elements.venueMapIframe.title = ui('mapTitle');
+    changeLanguageBtn.setAttribute('aria-label', ui('changeLanguage'));
+    elements.groomImg.alt = `${config.couple.groom.name} - ${config.couple.groom.title}`;
+    elements.brideImg.alt = `${config.couple.bride.name} - ${config.couple.bride.title}`;
+    clearTimeout(copyFeedbackTimeout);
+    initData();
+    startCountdown();
+  }
+
+  languageButtons.forEach(button => button.addEventListener('click', () => {
+    applyLanguage(button.dataset.language);
+    languageChosen = true;
+    languageOverlay.hidden = true;
+    document.body.classList.remove('choosing-language');
+    changeLanguageBtn.hidden = false;
+    const opened = elements.envelopeOverlay.classList.contains('opened');
+    elements.envelopeOverlay.inert = opened;
+    elements.envelopeOverlay.setAttribute('aria-hidden', String(opened));
+    setInvitationInert(!opened);
+    (opened ? changeLanguageBtn : elements.openInviteBtn).focus({ preventScroll: true });
+  }));
+
+  changeLanguageBtn.addEventListener('click', () => {
+    languageOverlay.hidden = false;
+    document.body.classList.add('choosing-language');
+    setInvitationInert(true);
+    elements.envelopeOverlay.inert = true;
+    elements.envelopeOverlay.setAttribute('aria-hidden', 'true');
+    languageButtons.find(button => button.dataset.language === language).focus();
+  });
+
+  languageOverlay.addEventListener('keydown', event => {
+    if (event.key === 'Tab') {
+      event.preventDefault();
+      const current = languageButtons.indexOf(document.activeElement);
+      languageButtons[(current + (event.shiftKey ? -1 : 1) + languageButtons.length) % languageButtons.length].focus();
+    }
+    if (event.key === 'Escape' && languageChosen) {
+      languageButtons.find(button => button.dataset.language === language).click();
+    }
+  });
 
   let canvasAnimationId = null;
 
@@ -135,9 +235,12 @@
   ============================================================ */
   function initData() {
     // Envelope Info
-    if (elements.envCoupleNames) elements.envCoupleNames.textContent = `${config.couple.groom.name.split(' ')[0]} & ${config.couple.bride.name.split(' ')[0]}`;
+    if (elements.envCoupleNames) elements.envCoupleNames.textContent = `${config.couple.groom.name.split(' ')[0]} ${language === 'kn' ? 'ಮತ್ತು' : '&'} ${config.couple.bride.name.split(' ')[0]}`;
     if (elements.envInitials) elements.envInitials.textContent = config.couple.initials;
-    if (elements.waxInitials) elements.waxInitials.textContent = config.couple.initials.replace(/\s+/g, '');
+    if (elements.waxInitials) elements.waxInitials.textContent = language === 'kn' ? config.couple.initials : config.couple.initials.replace(/\s+/g, '');
+    [elements.envInitials, elements.waxInitials, elements.navInitials, elements.footerInitials].forEach(node => {
+      if (node) node.lang = 'en';
+    });
     if (elements.envDate) elements.envDate.textContent = config.dateFormatted;
     
     // Navigation & Hero
@@ -180,8 +283,10 @@
       elements.heroMapBtn.href = config.venue.mapUrl;
     }
     if (elements.venueMapIframe && config.venue.address) {
-      const query = encodeURIComponent(`${config.venue.name}, ${config.venue.address}`);
-      elements.venueMapIframe.src = `https://maps.google.com/maps?q=${query}&t=&z=14&ie=UTF8&iwloc=&output=embed`;
+      // Keep the same searchable place in both languages; localize map controls.
+      const query = encodeURIComponent(`${englishConfig.venue.name}, ${englishConfig.venue.address}`);
+      const mapSrc = `https://maps.google.com/maps?q=${query}&t=&z=14&ie=UTF8&iwloc=&output=embed&hl=${language}`;
+      if (elements.venueMapIframe.getAttribute('src') !== mapSrc) elements.venueMapIframe.src = mapSrc;
     }
 
     // Footer
@@ -204,8 +309,8 @@
       card.className = 'event-card';
 
       // Google Calendar link for this event
-      const calTitle = encodeURIComponent(`${evt.title} - ${config.couple.groom.name} & ${config.couple.bride.name}'s Wedding`);
-      const calDetails = encodeURIComponent(`${evt.subtitle}\nVenue: ${evt.venue}`);
+      const calTitle = encodeURIComponent(language === 'kn' ? `${evt.title} - ${ui('calendarTitle')}` : `${evt.title} - ${config.couple.groom.name} & ${config.couple.bride.name}'s Wedding`);
+      const calDetails = encodeURIComponent(`${evt.subtitle}\n${ui('venue')}: ${evt.venue}`);
       const calLocation = encodeURIComponent(`${evt.venue}`);
       const googleCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${calTitle}&details=${calDetails}&location=${calLocation}`;
 
@@ -213,7 +318,7 @@
 
       card.innerHTML = `
         <div class="event-card-header">
-          <span class="event-badge">${evt.badge || 'Ceremony'}</span>
+          <span class="event-badge">${evt.badge || ui('ceremony')}</span>
         </div>
         <h3 class="event-title">${evt.title}</h3>
         <p class="event-subtitle">${evt.subtitle}</p>
@@ -222,21 +327,21 @@
           <li class="event-info-item">
             <i class="fa-regular fa-calendar-days"></i>
             <div>
-              <strong>Date</strong>
+              <strong>${ui('date')}</strong>
               <span>${evt.date}</span>
             </div>
           </li>
           <li class="event-info-item">
             <i class="fa-regular fa-clock"></i>
             <div>
-              <strong>Time</strong>
+              <strong>${ui('time')}</strong>
               <span>${evt.time}</span>
             </div>
           </li>
           <li class="event-info-item">
             <i class="fa-solid fa-location-pin"></i>
             <div>
-              <strong>Venue</strong>
+              <strong>${ui('venue')}</strong>
               <span>${evt.venue}</span>
             </div>
           </li>
@@ -244,10 +349,10 @@
 
         <div class="event-actions">
           <a href="${googleCalUrl}" target="_blank" rel="noopener noreferrer" class="event-cal-btn">
-            <i class="fa-regular fa-calendar-plus"></i> Add Event
+            <i class="fa-regular fa-calendar-plus"></i> ${ui('addEvent')}
           </a>
           <a href="${mapUrl}" target="_blank" rel="noopener noreferrer" class="event-map-btn">
-            <i class="fa-solid fa-location-dot"></i> Directions
+            <i class="fa-solid fa-location-dot"></i> ${ui('directions')}
           </a>
         </div>
       `;
@@ -259,6 +364,7 @@
      3. COUNTDOWN TIMER
   ============================================================ */
   function startCountdown() {
+    clearInterval(countdownInterval);
     function update() {
       const targetDate = new Date(config.weddingDate).getTime();
       const now = new Date().getTime();
@@ -284,7 +390,7 @@
     }
 
     update();
-    setInterval(update, 1000);
+    countdownInterval = setInterval(update, 1000);
   }
 
   /* ============================================================
@@ -292,6 +398,7 @@
   ============================================================ */
   if (elements.openInviteBtn) {
     elements.openInviteBtn.addEventListener('click', function () {
+      if (elements.envelopeBox.classList.contains('unsealing')) return;
       // Trigger flap opening & card slide
       elements.envelopeBox.classList.add('unsealing');
 
@@ -301,6 +408,13 @@
       // Smoothly dismiss envelope overlay after animation finishes
       setTimeout(() => {
         elements.envelopeOverlay.classList.add('opened');
+        elements.envelopeOverlay.inert = true;
+        elements.envelopeOverlay.setAttribute('aria-hidden', 'true');
+        if (languageOverlay.hidden) {
+          setInvitationInert(false);
+          document.getElementById('hero').setAttribute('tabindex', '-1');
+          document.getElementById('hero').focus({ preventScroll: true });
+        }
       }, 1100);
     });
   }
@@ -390,14 +504,14 @@
   ============================================================ */
   if (elements.addToCalBtn) {
     elements.addToCalBtn.addEventListener('click', () => {
-      const title = encodeURIComponent(`Wedding of ${config.couple.groom.name} & ${config.couple.bride.name}`);
+      const title = encodeURIComponent(ui('calendarTitle'));
       const details = encodeURIComponent(
-        `Wedding Celebrations of ${config.couple.groom.name} & ${config.couple.bride.name}\n\n` +
-        `• Reception: Saturday, 14th November 2026, 7:30 PM onwards\n` +
-        `• Auspicious Muhurtha: Sunday, 15th November 2026, 9:15 AM – 10:45 AM\n\n` +
-        `Venue: ${config.venue.name}\n` +
-        `Address: ${config.venue.address}\n` +
-        `Directions: ${config.venue.directionsUrl}`
+        `${ui('calendarIntro')}\n\n` +
+        `• ${ui('calendarReception')}\n` +
+        `• ${ui('calendarMuhurtha')}\n\n` +
+        `${ui('venue')}: ${config.venue.name}\n` +
+        `${ui('address')}: ${config.venue.address}\n` +
+        `${ui('directions')}: ${config.venue.directionsUrl}`
       );
       const location = encodeURIComponent(`${config.venue.name}, ${config.venue.address}`);
       const calUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${details}&location=${location}`;
@@ -406,19 +520,26 @@
   }
 
   if (elements.copyAddressBtn) {
-    elements.copyAddressBtn.addEventListener('click', () => {
+    elements.copyAddressBtn.addEventListener('click', async () => {
       const fullAddress = `${config.venue.name}, ${config.venue.address}`;
-      navigator.clipboard.writeText(fullAddress).then(() => {
-        elements.copyAddressBtn.innerHTML = `<i class="fa-solid fa-check"></i> Copied!`;
-        setTimeout(() => {
-          elements.copyAddressBtn.innerHTML = `<i class="fa-regular fa-copy"></i> Copy Full Address`;
+      const copiedLanguage = language;
+      try {
+        await navigator.clipboard.writeText(fullAddress);
+        if (copiedLanguage !== language) return;
+        elements.copyAddressBtn.innerHTML = `<i class="fa-solid fa-check"></i> ${ui('copied')}`;
+        clearTimeout(copyFeedbackTimeout);
+        copyFeedbackTimeout = setTimeout(() => {
+          elements.copyAddressBtn.innerHTML = `<i class="fa-regular fa-copy"></i> ${ui('copyAddress')}`;
         }, 2200);
-      });
+      } catch (error) {
+        window.alert(ui('copyError'));
+      }
     });
   }
 
   // Boot
   initData();
   startCountdown();
+  languageButtons[0].focus();
 
 })();
